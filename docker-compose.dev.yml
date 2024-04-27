@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+ nuxt:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    command: ["sh", "-c", "npx prisma migrate dev --name init && npx prisma generate && npx prisma migrate deploy && pnpm run dev --no-fork"]

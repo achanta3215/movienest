@@ -1,0 +1,27 @@
+{
+	"name": "MovieNest DevContainer",
+
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"../docker-compose.dev.yml"
+	],
+
+	"service": "nuxt",
+	"workspaceFolder": "/app",
+
+	
+	"forwardPorts": [
+		3000,
+		"db:3306"
+	],
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vue.volar",
+				"dbaeumer.vscode-eslint",
+				"github.copilot"
+			]
+		}
+	}
+}
