@@ -1,12 +1,16 @@
 <template>
     <div>
-        <h1>Search Results</h1>
-        <ul>
-            <li v-for="movie in results" :key="movie.id">
-                {{ movie.title }}
-                <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie poster">
-            </li>
-        </ul>
+        <h1>Search Movies</h1>
+        <v-text-field v-model="searchQuery" label="Search" outlined></v-text-field>
+        <v-btn @click="searchMovies">Search</v-btn>
+        <v-row>
+            <v-col cols="12" sm="6" md="4" lg="3" v-for="movie in results" :key="movie.id">
+                <div>
+                    {{ movie.title }}
+                    <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="Movie poster">
+                </div>
+            </v-col>
+        </v-row>
     </div>
 </template>
 
@@ -17,7 +21,11 @@ const headers = {
     'Authorization': `Bearer ${tmdbAccessToken}`
 };
 
-const { data } = await getApi(useNuxtApp(), 'https://api.themoviedb.org/3/search/movie', { headers, query: { query: 'The+Matrix' } });
-const results = ref(data.value.results);
+const searchQuery = ref('');
+const results = ref([]);
+const searchMovies = async () => {
+    const { data } = await getApi(useNuxtApp(), 'api/tmbd', { headers, query: { search_txt: searchQuery.value } });
+    results.value = data.value.results;
+}
 
 </script>
