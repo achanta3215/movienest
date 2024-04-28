@@ -9,6 +9,5 @@
         'Authorization': `Bearer ${tmdbAccessToken}`
     };
 
-    const { data } = await getApi(useNuxtApp(), 'https://api.themoviedb.org/3/search/movie', '', { headers, query: { query: 'The+Matrix' } });
-    console.log(data.value)
+    const { data } = await getApi(useNuxtApp(), 'https://api.themoviedb.org/3/search/movie', { headers, query: { query: 'The+Matrix' } });
 </script>
